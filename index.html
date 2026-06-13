@@ -57,6 +57,10 @@
       display: block;
       transition: transform 0.15s;
     }
+
+    .google-play-link {
+      margin-left: auto;
+    }
     
     .google-play-badge:hover {
       transform: scale(1.03);
@@ -156,7 +160,6 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 20px;
     }
 
     .tag {
@@ -466,8 +469,9 @@
             <span class="tag">Automation</span>
             <span class="tag green">Free</span>
           </div>
-    
-          <a href="https://play.google.com/store/apps/details?id=com.hplabs.visualclicker">
+          <a
+            class="google-play-link"
+            href="https://play.google.com/store/apps/details?id=com.hplabs.visualclicker">
             <img
               src="get_it_on_google_play.png"
               alt="Get it on Google Play"
