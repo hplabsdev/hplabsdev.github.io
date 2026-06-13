@@ -43,6 +43,20 @@
       z-index: 100;
     }
 
+    .meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+  }
+  
+  .google-play-badge {
+      height: 48px;
+      width: auto;
+      display: block;
+  }
+
     .header-logo {
       width: 28px;
       height: 28px;
@@ -419,28 +433,21 @@
 
     <!-- App hero -->
     <div class="app-hero">
-      <img src="logo.png" alt="Visual Clicker icon" class="app-icon"
-           onerror="this.outerHTML='<div class=\'app-icon-placeholder\'>👆</div>'">
-
-      <div class="app-meta">
-        <h1 class="app-name">Visual Clicker – Auto Clicker</h1>
-        <p class="app-developer">HP Labs</p>
-
+      <img src="logo.png" alt="Visual Clicker icon" class="app-icon" onerror="this.outerHTML='<div class=\'app-icon-placeholder\'>👆</div>'">
+      
+      <div class="meta-row">
         <div class="app-tags">
-          <span class="tag">Tools</span>
-          <span class="tag">Automation</span>
-          <span class="tag green">Free</span>
+            <span class="tag">Tools</span>
+            <span class="tag">Automation</span>
+            <span class="tag green">Free</span>
         </div>
-        <div>
-          <a href="https://play.google.com/store/apps/details?id=com.hplabs.visualclicker">
-              <img
-                  src="get_it_on_google_play.png"
-                  alt="Get it on Google Play"
-                  style="height: 52px; width: auto;"
-              >
-          </a>
-        </div>
-      </div>
+    
+        <a href="https://play.google.com/store/apps/details?id=com.hplabs.visualclicker">
+            <img
+                src="get_it_on_google_play.png"
+                alt="Get it on Google Play"
+                class="google-play-badge">
+        </a>
     </div>
 
     <!-- Stats -->
