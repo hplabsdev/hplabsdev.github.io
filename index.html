@@ -48,14 +48,30 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      margin-bottom: 20px;
-  }
-  
-  .google-play-badge {
+      margin-top: 12px;
+    }
+    
+    .google-play-badge {
       height: 48px;
       width: auto;
       display: block;
-  }
+      transition: transform 0.15s;
+    }
+    
+    .google-play-badge:hover {
+      transform: scale(1.03);
+    }
+    
+    .meta-row .app-tags {
+      margin-bottom: 0;
+    }
+    
+    @media (max-width: 700px) {
+      .meta-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
 
     .header-logo {
       width: 28px;
@@ -433,21 +449,35 @@
 
     <!-- App hero -->
     <div class="app-hero">
-      <img src="logo.png" alt="Visual Clicker icon" class="app-icon" onerror="this.outerHTML='<div class=\'app-icon-placeholder\'>👆</div>'">
-      
-      <div class="meta-row">
-        <div class="app-tags">
+
+      <img src="logo.png" alt="Visual Clicker icon" class="app-icon">
+    
+      <div class="app-meta">
+    
+        <h1 class="app-name">Visual Clicker – Auto Clicker</h1>
+    
+        <p class="app-developer">HP Labs</p>
+    
+        <!-- META ROW -->
+        <div class="meta-row">
+    
+          <div class="app-tags">
             <span class="tag">Tools</span>
             <span class="tag">Automation</span>
             <span class="tag green">Free</span>
+          </div>
+    
+          <a href="https://play.google.com/store/apps/details?id=com.hplabs.visualclicker">
+            <img
+              src="get_it_on_google_play.png"
+              alt="Get it on Google Play"
+              class="google-play-badge">
+          </a>
+    
         </div>
     
-        <a href="https://play.google.com/store/apps/details?id=com.hplabs.visualclicker">
-            <img
-                src="get_it_on_google_play.png"
-                alt="Get it on Google Play"
-                class="google-play-badge">
-        </a>
+      </div>
+    
     </div>
 
     <!-- Stats -->
