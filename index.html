@@ -1,161 +1,576 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HP Labs Dev - Amazing Apps</title>
-    <style>
-        /* 1. Base Styles and Background */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            /* Novo Gradiente de Fundo: Azul Profundo para Roxo Vibrante */
-            background: linear-gradient(135deg, #1A237E 0%, #4A148C 100%); 
-            overflow: hidden; 
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visual Clicker – Auto Clicker | HP Labs Dev</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* 2. Main Content */
-        .content-container {
-            position: relative;
-            z-index: 10; 
-            text-align: center;
-            padding: 40px;
-            border-radius: 15px;
-            background: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente mais escuro */
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7); /* Sombra mais profunda */
-            backdrop-filter: blur(8px); /* Desfoque um pouco mais intenso */
-        }
+    :root {
+      --bg: #f8f9fa;
+      --surface: #ffffff;
+      --border: #e0e0e0;
+      --text-primary: #202124;
+      --text-secondary: #5f6368;
+      --accent: #1a73e8;
+      --accent-light: #e8f0fe;
+      --rating: #f9ab00;
+      --green: #1e8e3e;
+      --radius: 12px;
+    }
 
-        h1 {
-            font-size: 3.8em; /* Título um pouco maior */
-            margin-bottom: 5px;
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
-            color: #E0BBE4; /* Roxo claro para o título */
-        }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
 
-        h2 {
-            font-size: 1.6em;
-            font-weight: 300;
-            margin-top: 0;
-            margin-bottom: 35px; /* Mais espaço */
-            color: #957DAD; /* Tom de roxo médio */
-        }
+    /* ── Header ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      height: 56px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
 
-        .app-button {
-            display: inline-block;
-            /* Botão com gradiente vibrante de azul para roxo */
-            background: linear-gradient(45deg, #00BFFF 0%, #9932CC 100%); 
-            color: white;
-            padding: 18px 40px; /* Botão um pouco maior */
-            margin: 15px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2em; /* Texto maior no botão */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-            border: none; /* Remove borda padrão */
-        }
+    .header-logo {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
 
-        .app-button:hover {
-            transform: translateY(-3px) scale(1.02); /* Pequeno levantamento e aumento */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-        }
+    .header-title {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 500;
+      color: #5f6368;
+      letter-spacing: 0.1px;
+    }
 
-        .link-footer {
-            margin-top: 40px; /* Mais espaço no rodapé */
-        }
+    .header-title span {
+      color: var(--accent);
+    }
 
-        .link-footer a {
-            color: #D1C4E9; /* Roxo muito claro para links */
-            margin: 0 20px; /* Mais espaçamento entre links */
-            text-decoration: none;
-            opacity: 0.8;
-            transition: opacity 0.3s ease, color 0.3s ease;
-            font-size: 0.95em;
-        }
+    /* ── Main layout ── */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 24px 64px;
+    }
 
-        .link-footer a:hover {
-            opacity: 1;
-            color: #ffffff;
-        }
+    /* ── App hero card ── */
+    .app-hero {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
 
-        /* 3. Particle Animation (Estrelas/Pontos) - Cores ajustadas */
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 5;
-        }
+    .app-icon {
+      width: 96px;
+      height: 96px;
+      border-radius: 20px;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+    }
 
-        .particle {
-            position: absolute;
-            background: #E0BBE4; /* Partículas em tom de roxo claro */
-            border-radius: 50%;
-            opacity: 0.6; /* Opacidade ligeiramente reduzida */
-            animation-iteration-count: infinite;
-            animation-timing-function: linear;
-            box-shadow: 0 0 8px #E0BBE4; /* Pequeno brilho nas partículas */
-        }
+    .app-icon-placeholder {
+      width: 96px;
+      height: 96px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #1a73e8, #6c5ce7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 36px;
+    }
 
-        /* Definition of the Floating Animation */
-        @keyframes float {
-            0% { transform: translate(0, 0); opacity: 0.8; }
-            50% { transform: translate(120px, 120px); opacity: 0.3; } /* Movimento e opacidade ajustados */
-            100% { transform: translate(0, 0); opacity: 0.8; }
-        }
+    .app-meta {
+      flex: 1;
+      min-width: 0;
+    }
 
-        /* 4. Generation and Individual Particle Styles (sem alterações nos tamanhos/posições) */
-        .particle:nth-child(1) { width: 15px; height: 15px; top: 10%; left: 20%; animation: float 15s ease-in-out infinite; }
-        .particle:nth-child(2) { width: 8px; height: 8px; top: 70%; left: 80%; animation: float 20s ease-in-out infinite reverse; }
-        .particle:nth-child(3) { width: 20px; height: 20px; top: 50%; left: 40%; animation: float 25s ease-in-out infinite; }
-        .particle:nth-child(4) { width: 10px; height: 10px; top: 85%; left: 10%; animation: float 18s ease-in-out infinite; }
-        .particle:nth-child(5) { width: 12px; height: 12px; top: 30%; left: 90%; animation: float 22s ease-in-out infinite reverse; }
-        .particle:nth-child(6) { width: 6px; height: 6px; top: 5%; left: 55%; animation: float 17s ease-in-out infinite; }
-        .particle:nth-child(7) { width: 18px; height: 18px; top: 90%; left: 60%; animation: float 28s ease-in-out infinite; }
-        .particle:nth-child(8) { width: 9px; height: 9px; top: 25%; left: 5%; animation: float 14s ease-in-out infinite reverse; }
-        .particle:nth-child(9) { width: 11px; height: 11px; top: 40%; left: 75%; animation: float 19s ease-in-out infinite; }
-        .particle:nth-child(10) { width: 7px; height: 7px; top: 60%; left: 30%; animation: float 21s ease-in-out infinite reverse; }
-    </style>
+    .app-name {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .app-developer {
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .app-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .tag {
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 100px;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .tag.green {
+      background: #e6f4ea;
+      color: var(--green);
+    }
+
+    .cta-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-install {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 24px;
+      border-radius: 100px;
+      font-family: 'Google Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .btn-install:hover { background: #1557b0; }
+    .btn-install:active { transform: scale(0.97); }
+
+    .btn-install svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .install-note {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* ── Stats row ── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .stat-cell {
+      background: var(--surface);
+      padding: 16px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stars {
+      color: var(--rating);
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+
+    /* ── Screenshots carousel ── */
+    .section-title {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 14px;
+    }
+
+    .carousel-wrapper {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .carousel-track-outer {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 16px;
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .carousel-slide {
+      flex-shrink: 0;
+      width: calc(50% - 8px);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      aspect-ratio: 9/16;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .carousel-slide .placeholder-screen {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(160deg, #e8f0fe 0%, #f1f3f4 100%);
+      color: var(--text-secondary);
+      font-size: 13px;
+      gap: 8px;
+    }
+
+    .carousel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .carousel-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-primary);
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .carousel-btn:hover { background: var(--bg); border-color: #bdbdbd; }
+    .carousel-btn:disabled { opacity: 0.35; cursor: default; }
+
+    .carousel-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: background 0.2s, width 0.2s;
+    }
+
+    .dot.active {
+      background: var(--accent);
+      width: 18px;
+      border-radius: 3px;
+    }
+
+    /* ── About section ── */
+    .about-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .about-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .about-card p:last-child { margin-bottom: 0; }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .feature-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      color: var(--accent);
+      margin-top: 1px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 24px;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 8px;
+    }
+
+    .footer-links a {
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .footer-links a:hover { color: var(--accent); }
+
+    .footer-copy {
+      font-size: 11px;
+      color: #9aa0a6;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .app-hero { flex-direction: column; }
+      .stats-row { grid-template-columns: 1fr 1fr 1fr; }
+      .carousel-slide { width: calc(75% - 8px); }
+      .feature-grid { grid-template-columns: 1fr; }
+      .app-name { font-size: 22px; }
+    }
+
+    @media (max-width: 400px) {
+      .carousel-slide { width: calc(90% - 8px); }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="content-container">
-        <h1>HP Labs Dev</h1>
-        <h2>Innovation and automation in the palm of your hand.</h2>
+  <header>
+    <img src="logo.png" alt="HP Labs Dev logo" class="header-logo" onerror="this.style.display='none'">
+    <span class="header-title">HP Labs <span>Dev</span></span>
+  </header>
 
-        <a href="https://play.google.com/store/apps/details?id=com.hplabs.visualclicker" target="_blank" class="app-button">
-            Download Visual Clicker - Auto Clicker
-        </a>
-        
-        <div class="link-footer">
-            <a href="LINK_TO_YOUR_PRIVACY_POLICY" target="_blank">Privacy Policy</a>
-            <a href="mailto:YOUR_CONTACT_EMAIL_HERE">Contact</a>
-            <a href="/app-ads.txt" style="opacity: 0; position: absolute; height: 0; overflow: hidden;" aria-hidden="true">app-ads.txt</a>
+  <main>
+
+    <!-- App hero -->
+    <div class="app-hero">
+      <img src="logo.png" alt="Visual Clicker icon" class="app-icon"
+           onerror="this.outerHTML='<div class=\'app-icon-placeholder\'>👆</div>'">
+
+      <div class="app-meta">
+        <h1 class="app-name">Visual Clicker – Auto Clicker</h1>
+        <p class="app-developer">HP Labs Dev</p>
+
+        <div class="app-tags">
+          <span class="tag">Tools</span>
+          <span class="tag">Automation</span>
+          <span class="tag green">Free</span>
         </div>
+
+        <div class="cta-row">
+          <a href="https://play.google.com/store/apps/details?id=com.hplabs.visualclicker"
+             target="_blank" rel="noopener" class="btn-install">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3.18 23.76a2.4 2.4 0 0 0 2.56-.26l13.55-7.84-3.54-3.54-12.57 11.64zM.27 1.06A2.34 2.34 0 0 0 0 2.14v19.72c0 .37.1.72.27 1.08l12.88-11.94L.27 1.06zM20.1 9.24 16.7 7.29 12.8 11l3.91 3.71 3.42-1.97a2.4 2.4 0 0 0 0-3.5zm-16.92-7.5 13.55 7.83-3.54 3.53L3.18.24a2.41 2.41 0 0 1 0 1.5z"/>
+            </svg>
+            Get it on Google Play
+          </a>
+          <span class="install-note">Free · No ads required to use</span>
+        </div>
+      </div>
     </div>
 
-    <div class="particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-cell">
+        <div class="stars">★★★★★</div>
+        <div class="stat-label">Rating</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-value">1K+</div>
+        <div class="stat-label">Downloads</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-value">3+</div>
+        <div class="stat-label">Age rating</div>
+      </div>
     </div>
+
+    <!-- Screenshots -->
+    <p class="section-title">Screenshots</p>
+    <div class="carousel-wrapper">
+      <div class="carousel-track-outer">
+        <div class="carousel-track" id="track">
+
+          <div class="carousel-slide">
+            <img src="1-playstore.png" alt="Visual Clicker screenshot 1"
+                 onerror="this.parentElement.innerHTML='<div class=\'placeholder-screen\'><svg width=\'32\' height=\'32\' fill=\'none\' stroke=\'#9aa0a6\' stroke-width=\'1.5\' viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'12\' cy=\'12\' r=\'3\'/></svg><span>Screenshot 1</span></div>'">
+          </div>
+
+          <div class="carousel-slide">
+            <img src="2-playstore.png" alt="Visual Clicker screenshot 2"
+                 onerror="this.parentElement.innerHTML='<div class=\'placeholder-screen\'><svg width=\'32\' height=\'32\' fill=\'none\' stroke=\'#9aa0a6\' stroke-width=\'1.5\' viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'12\' cy=\'12\' r=\'3\'/></svg><span>Screenshot 2</span></div>'">
+          </div>
+
+        </div>
+      </div>
+
+      <div class="carousel-controls">
+        <button class="carousel-btn" id="prev" aria-label="Previous screenshot" disabled>
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M15 18l-6-6 6-6"/>
+          </svg>
+        </button>
+        <div class="carousel-dots" id="dots">
+          <div class="dot active"></div>
+          <div class="dot"></div>
+        </div>
+        <button class="carousel-btn" id="next" aria-label="Next screenshot">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M9 18l6-6-6-6"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- About -->
+    <p class="section-title">About this app</p>
+    <div class="about-card">
+      <p>Visual Clicker is a lightweight automation tool that lets you set up automatic taps anywhere on your screen — perfect for repetitive tasks in games, forms, or any app that needs a steady click rhythm.</p>
+      <p>Just place your click points visually, set the interval, and let the app do the work. No complex configuration needed.</p>
+
+      <div class="feature-grid">
+        <div class="feature-item">
+          <svg class="feature-icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path d="M5 13l4 4L19 7"/>
+          </svg>
+          Visual click placement
+        </div>
+        <div class="feature-item">
+          <svg class="feature-icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path d="M5 13l4 4L19 7"/>
+          </svg>
+          Custom tap intervals
+        </div>
+        <div class="feature-item">
+          <svg class="feature-icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path d="M5 13l4 4L19 7"/>
+          </svg>
+          Works across any app
+        </div>
+        <div class="feature-item">
+          <svg class="feature-icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path d="M5 13l4 4L19 7"/>
+          </svg>
+          Lightweight & fast
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="mailto:hplabs.contato@gmail.com">Contact</a>
+    </div>
+    <p class="footer-copy">© 2025 HP Labs Dev · All rights reserved</p>
+    <a href="/app-ads.txt" style="opacity:0;position:absolute;height:0;overflow:hidden" aria-hidden="true">app-ads.txt</a>
+  </footer>
+
+  <script>
+    const track = document.getElementById('track');
+    const slides = track.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.dot');
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+    let current = 0;
+    const total = slides.length;
+
+    function goTo(index) {
+      current = Math.max(0, Math.min(index, total - 1));
+      const slideWidth = slides[0].offsetWidth + 16;
+      track.style.transform = `translateX(-${current * slideWidth}px)`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === total - 1;
+    }
+
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+
+    let startX = 0;
+    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', e => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+    });
+  </script>
 
 </body>
 </html>
